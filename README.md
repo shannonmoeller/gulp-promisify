@@ -19,25 +19,25 @@ import xo from 'gulp-xo';
 promisify(gulp);
 
 export function lint() {
-	return gulp
-		.src('*.js')
-		.pipe(xo());
+    return gulp
+        .src('*.js')
+        .pipe(xo());
 }
 
 export function test() {
-	return gulp
-		.src('test.js')
-		.pipe(tape());
+    return gulp
+        .src('test.js')
+        .pipe(tape());
 }
 
 gulp.task('testSeries', async () => {
-	await lint();
-	await test();
+    await lint();
+    await test();
 });
 
 gulp.task('testParallel', () => {
-	lint();
-	test();
+    lint();
+    test();
 });
 ```
 

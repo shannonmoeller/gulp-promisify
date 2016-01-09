@@ -18,13 +18,13 @@ import xo from 'gulp-xo';
 
 promisify(gulp);
 
-function lint() {
+export function lint() {
 	return gulp
 		.src('*.js')
 		.pipe(xo());
 }
 
-function test() {
+export function test() {
 	return gulp
 		.src('test.js')
 		.pipe(tape());

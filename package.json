@@ -31,7 +31,7 @@
     "gulp-xo": "^0.7.0"
   },
   "scripts": {
-    "cover": "gulp cover"
+    "cover": "gulp cover",
     "test": "gulp test"
   },
   "babel": {

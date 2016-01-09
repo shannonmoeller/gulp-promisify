@@ -29,6 +29,7 @@ function promisifyGulp(gulp) {
 
 	var dest = gulp.dest;
 	var src = gulp.src;
+	var symlink = gulp.symlink;
 
 	gulp.dest = function () {
 		return promisifyStream(dest.apply(this, arguments));
@@ -36,6 +37,10 @@ function promisifyGulp(gulp) {
 
 	gulp.src = function () {
 		return promisifyStream(src.apply(this, arguments));
+	};
+
+	gulp.symlink = function () {
+		return promisifyStream(symlink.apply(this, arguments));
 	};
 
 	return gulp;

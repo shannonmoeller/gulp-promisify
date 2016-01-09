@@ -1,0 +1,55 @@
+{
+  "name": "gulp-promisify",
+  "version": "0.1.0",
+  "description": "Gulp flow control using async/await.",
+  "keywords": [
+    "gulp",
+    "async",
+    "await",
+    "promise",
+    "promisify",
+    "pify"
+  ],
+  "author": "Shannon Moeller <me@shannonmoeller.com> (http://shannonmoeller.com)",
+  "license": "MIT",
+  "main": "index.js",
+  "homepage": "https://github.com/shannonmoeller/gulp-promisify",
+  "bugs": "https://github.com/shannonmoeller/gulp-promisify/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shannonmoeller/gulp-promisify"
+  },
+  "devDependencies": {
+    "babel-core": "^6.4.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "babel-regenerator-runtime": "^6.3.13",
+    "blue-tape": "^0.1.11",
+    "gulp": "^3.9.0",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-tape": "0.0.7",
+    "gulp-xo": "^0.7.0"
+  },
+  "scripts": {
+    "cover": "gulp cover"
+    "test": "gulp test"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0"
+    ]
+  },
+  "xo": {
+    "overrides": [
+      {
+        "files": "*.js",
+        "esnext": true
+      },
+      {
+        "files": "index.js",
+        "esnext": false
+      }
+    ]
+  }
+}

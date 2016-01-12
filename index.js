@@ -6,8 +6,8 @@ function promisifyStream(stream) {
 	}
 
 	var promise = new Promise(function (resolve, reject) {
-		stream.on('end', resolve.bind(null, stream));
-		stream.on('error', reject);
+		stream.once('end', resolve.bind(null, stream));
+		stream.once('error', reject);
 		stream.on('pipe', promisifyStream);
 	});
 

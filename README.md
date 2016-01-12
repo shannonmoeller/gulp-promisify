@@ -50,7 +50,7 @@ gulp.task('test:series', testSeries);
 
 ### `promisify(gulp)`
 
-Causes streams returned by `.src()`, `.dest()`, and `.symlink()` to also be [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) objects with `.then()` and `.catch()` methods. The promise is resolved when the stream emits the [`'finish'`](https://nodejs.org/api/stream.html#stream_event_finish) event. This promisification propagates to all subsequent streams via `.pipe()` to ensure that you may await any following stream.
+Causes streams returned by `.src()`, `.dest()`, and `.symlink()` to also be [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) objects with `.then()` and `.catch()` methods. The promise is resolved when the stream emits the [`'end'`](https://nodejs.org/api/stream.html#stream_event_end) event. This promisification propagates to all subsequent streams via `.pipe()` to ensure that you may await any following stream.
 
 ```js
 gulp.src('*.js')

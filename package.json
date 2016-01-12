@@ -4,6 +4,7 @@
   "description": "Gulp flow control using async/await.",
   "keywords": [
     "gulp",
+    "gulpplugin",
     "async",
     "await",
     "promise",

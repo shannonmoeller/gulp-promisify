@@ -30,29 +30,34 @@ export function test() {
         .pipe(tape());
 }
 
-gulp.task('testSeries', async () => {
-    await lint();
-    await test();
-});
-
-gulp.task('testParallel', () => {
+export function testParallel() {
     lint();
     test();
-});
+}
+
+export async function testSeries() {
+    await lint();
+    await test();
+}
+
+gulp.task('lint', lint);
+gulp.task('test', test);
+gulp.task('test:parallel', testParallel);
+gulp.task('test:series', testSeries);
 ```
 
 ## API
 
 ### `promisify(gulp)`
 
-TODO: Section on how `.src()` and `.dest()` streams, and all subsequent streams, are assigned `.then()` and `.catch()` methods.
+Causes streams returned by `.src()`, `.dest()`, and `.symlink()` to also be [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) objects with `.then()` and `.catch()` methods. The promise is resolved when the stream emits the [`'finish'`](https://nodejs.org/api/stream.html#stream_event_finish) event. This promisification propagates to all subsequent streams via `.pipe()` to ensure that you may await any following stream.
 
-## Known Issues
-
-### Event: `'finish'`
-
-TODO: Section on promises resolving without a value.
-TODO: Section on async `_flush`.
+```js
+gulp.src('*.js')
+    .pipe(somePlugin())
+    .pipe(anotherPlugin())
+    .pipe(yetAnotherPlugin()); // <- returns a promisified stream
+```
 
 ## Contribute
 

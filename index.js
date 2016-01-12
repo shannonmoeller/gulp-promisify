@@ -5,25 +5,20 @@ function promisifyStream(stream) {
 		return stream;
 	}
 
-	var pipe = stream.pipe;
 	var promise = new Promise(function (resolve, reject) {
-		stream.on('finish', resolve);
+		stream.on('end', resolve.bind(null, stream));
 		stream.on('error', reject);
+		stream.on('pipe', promisifyStream);
 	});
 
 	stream.then = promise.then.bind(promise);
 	stream.catch = promise.catch.bind(promise);
 
-	stream.pipe = function (nextStream) {
-		promisifyStream(nextStream);
-		return pipe.apply(this, arguments);
-	};
-
 	return stream;
 }
 
 function promisifyGulp(gulp) {
-	if (!gulp || !gulp.dest || !gulp.src) {
+	if (!gulp) {
 		return gulp;
 	}
 
@@ -31,17 +26,23 @@ function promisifyGulp(gulp) {
 	var src = gulp.src;
 	var symlink = gulp.symlink;
 
-	gulp.dest = function () {
-		return promisifyStream(dest.apply(this, arguments));
-	};
+	if (dest) {
+		gulp.dest = function () {
+			return promisifyStream(dest.apply(this, arguments));
+		};
+	}
 
-	gulp.src = function () {
-		return promisifyStream(src.apply(this, arguments));
-	};
+	if (src) {
+		gulp.src = function () {
+			return promisifyStream(src.apply(this, arguments));
+		};
+	}
 
-	gulp.symlink = function () {
-		return promisifyStream(symlink.apply(this, arguments));
-	};
+	if (symlink) {
+		gulp.symlink = function () {
+			return promisifyStream(symlink.apply(this, arguments));
+		};
+	}
 
 	return gulp;
 }

@@ -18,34 +18,25 @@ function promisifyStream(stream) {
 }
 
 function promisifyGulp(gulp) {
-	if (!gulp) {
+	if (!gulp || !gulp.src) {
 		return gulp;
 	}
 
-	var dest = gulp.dest;
-	var src = gulp.src;
-	var symlink = gulp.symlink;
+	['dest', 'src', 'symlink'].forEach(function (name) {
+		var method = gulp[name];
 
-	if (dest) {
-		gulp.dest = function () {
-			return promisifyStream(dest.apply(this, arguments));
-		};
-	}
+		if (typeof method !== 'function') {
+			return;
+		}
 
-	if (src) {
-		gulp.src = function () {
-			return promisifyStream(src.apply(this, arguments));
+		gulp[name] = function () {
+			return promisifyStream(method.apply(this, arguments));
 		};
-	}
-
-	if (symlink) {
-		gulp.symlink = function () {
-			return promisifyStream(symlink.apply(this, arguments));
-		};
-	}
+	});
 
 	return gulp;
 }
 
 module.exports = promisifyGulp;
+module.exports.promisifyGulp = promisifyGulp;
 module.exports.promisifyStream = promisifyStream;

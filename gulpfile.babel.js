@@ -1,5 +1,6 @@
 import 'babel-regenerator-runtime';
 import gulp from 'gulp';
+import faucet from 'faucet';
 import istanbul from 'gulp-istanbul';
 import promisify from './index.js';
 import tape from 'gulp-tape';
@@ -23,7 +24,9 @@ export function instrument() {
 export function test() {
 	return gulp
 		.src('test/*.js')
-		.pipe(tape());
+		.pipe(tape({
+			reporter: faucet()
+		}));
 }
 
 export function report() {
@@ -31,14 +34,15 @@ export function report() {
 		.pipe(istanbul.writeReports());
 }
 
-gulp.task('default', ['test']);
-
-gulp.task('test', async () => {
-	await lint();
-	await test();
-});
-
-gulp.task('cover', async () => {
+export async function cover() {
 	await instrument();
 	await report();
+}
+
+gulp.task('default', async () => {
+	await lint();
+	await cover();
 });
+
+gulp.task('lint', lint);
+gulp.task('test', cover);

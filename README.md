@@ -1,5 +1,9 @@
 # DEPRECATED: Use [Gulp 4](https://github.com/gulpjs/gulp/tree/4.0) with `.series()` and `.parallel()` instead.
 
+Using `gulpfile.babel.js` isn't compatible with the `async/await` keywords out of the box. If you're going to use Gulp, might as well embrace the ecosystem.
+
+---
+
 # `gulp-promisify`
 
 [![NPM version][npm-img]][npm-url] [![Downloads][downloads-img]][npm-url] [![Build Status][travis-img]][travis-url] [![Coverage Status][coveralls-img]][coveralls-url] [![Chat][gitter-img]][gitter-url] [![Tip][amazon-img]][amazon-url]

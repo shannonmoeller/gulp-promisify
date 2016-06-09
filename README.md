@@ -1,3 +1,5 @@
+# DEPRECATED: Use [Gulp 4](https://github.com/gulpjs/gulp/tree/4.0) with `.series()` and `.parallel()` instead.
+
 # `gulp-promisify`
 
 [![NPM version][npm-img]][npm-url] [![Downloads][downloads-img]][npm-url] [![Build Status][travis-img]][travis-url] [![Coverage Status][coveralls-img]][coveralls-url] [![Chat][gitter-img]][gitter-url] [![Tip][amazon-img]][amazon-url]

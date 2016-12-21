@@ -1,6 +1,6 @@
 {
   "name": "gulp-promisify",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Gulp flow control using async/await.",
   "keywords": [
     "gulp",
